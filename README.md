@@ -29,7 +29,7 @@ The atlas does not request visitors' locations. Map tiles load only near the
 atlas, normal page scrolling is not hijacked, and touch users can explicitly
 unlock map dragging. Galleries remain available if map tiles cannot load.
 
-**Website:** https://ketkifadnavis.github.io/ugc-portfolio/
+**Website:** https://ketkifadnavis.github.io/ugcportfolio/
 
 ## Local preview
 
@@ -45,7 +45,7 @@ code or styles so returning visitors do not mix cached and updated files.
 In Settings > Pages, the source is **Deploy from a branch**, **main**, **/ (root)**.
 The `.nojekyll` file disables Jekyll processing.
 
-Keep asset URLs relative so photos, videos and scripts work under `/ugc-portfolio/`.
+Keep asset URLs relative so photos, videos and scripts work under `/ugcportfolio/`.
 The public repository contains only website files and selected web-ready media.
 Original photo archives, private review materials, old theme assets and temporary
 video exports are excluded by `.gitignore`.
