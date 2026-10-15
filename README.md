@@ -1,6 +1,9 @@
 # Ketki's portfolio
 
 A personal travel, food and lifestyle story, built with HTML, CSS and JavaScript.
+The opening is an original illustrated world with six landmarks linking to the
+story. A sticky five-chapter map follows the narrative without hijacking scrolling.
+Scene motion can be paused and respects the system's reduced-motion preference.
 
 **Website:** https://ketkifadnavis.github.io/ugc-portfolio/
 

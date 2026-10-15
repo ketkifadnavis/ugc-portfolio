@@ -90,6 +90,123 @@ const questNotes = {
 };
 let activeQuest = "postcard";
 
+const storyChapters = [
+  { id: "little-me", label: "Little me", icon: "curiosity" },
+  { id: "developer-life", label: "Code & coffee", icon: "laptop" },
+  { id: "the-detours", label: "The detours", icon: "mountain" },
+  { id: "at-the-table", label: "At the table", icon: "coffee" },
+  { id: "little-things", label: "Little joys", icon: "leaf" },
+];
+
+function chapterIcon(kind) {
+  const drawings = {
+    curiosity: '<circle cx="12" cy="12" r="8"/><path d="M5 7c4 0 6 4 6 9m4-12c-4 5-3 11 3 14M4 14c4-5 11-6 16-3"/>',
+    laptop: '<rect x="4" y="4" width="16" height="12" rx="2"/><path d="m2 20 2-4h16l2 4H2m7-12-2 2 2 2m6-4 2 2-2 2"/>',
+    mountain: '<path d="m2 20 8-15 7 15H2m12-7 3-6 5 13h-5M7 11l3 2 3-2"/><circle cx="19" cy="4" r="2"/>',
+    coffee: '<path d="M4 9h13v7a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9m13 1h2a3 3 0 0 1 0 6h-2M8 2c-3 3 3 3 0 5m5-5c-3 3 3 3 0 5"/>',
+    leaf: '<path d="M20 3C6 2 1 9 6 16S22 15 20 3ZM3 22 16 8m-9 9v-6m5 1h5"/>',
+    city: '<path d="M3 21V7h7v14m0 0V3h10v18H3m3-10h1m-1 4h1m7-11h2m-2 4h2m-2 4h2m-2 4h2"/>',
+  };
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${drawings[kind]}</svg>`;
+}
+
+function illustratedWorld() {
+  return `<svg class="world-art" viewBox="0 0 1320 680" fill="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="world-sky" x2="0" y2="680" gradientUnits="userSpaceOnUse"><stop stop-color="#deece9"/><stop offset=".7" stop-color="#f5efda"/></linearGradient>
+      <linearGradient id="world-water" x1="950" y1="400" x2="1150" y2="680" gradientUnits="userSpaceOnUse"><stop stop-color="#abd0cf"/><stop offset="1" stop-color="#84b4b9"/></linearGradient>
+      <pattern id="world-grain" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="2" cy="3" r=".65" fill="#56452d" opacity=".09"/><circle cx="6" cy="6" r=".4" fill="#fffaf0" opacity=".6"/></pattern>
+    </defs>
+    <path fill="url(#world-sky)" d="M0 0h1320v680H0z"/>
+    <circle class="world-sun" cx="1100" cy="105" r="52" fill="#edb76b"/><circle cx="1100" cy="105" r="65" stroke="#edb76b" stroke-dasharray="2 13"/>
+    <g class="world-cloud cloud-one" fill="#fffcf2"><path d="M244 101c-22-25-57-10-56 10-25-7-41 18-28 29h144c23-18-2-43-24-32-5-16-26-22-36-7Z"/></g>
+    <g class="world-cloud cloud-two" fill="#fffcf2"><path d="M790 77c-10-24-45-26-54-2-23-12-47 5-39 21h132c18-15-8-39-28-24-1-1-6 0-11 5Z"/></g>
+    <g stroke="#687d72" stroke-width="2.5" stroke-linecap="round"><path d="M869 145q9-10 18 0 9-10 18 0m42 23q7-8 14 0 7-8 14 0"/></g>
+    <path d="m234 334 130-183 124 183" fill="#a8bca5"/><path d="m364 151-35 49 30-8 23 20 14-14Z" fill="#f8f4e7"/>
+    <path d="m347 355 161-229 169 229" fill="#829f92"/><path d="m508 126-48 68 40-17 26 25 23-20Z" fill="#faf7ec"/>
+    <path d="M0 346C162 231 318 294 464 339s252-128 422-78 259 3 434-41v460H0Z" fill="#c5d0ad"/>
+    <path d="M0 454C164 320 316 381 456 406s192-111 375-55 300 4 489-47v376H0Z" fill="#a5bb92"/>
+    <path d="M0 560C146 447 240 504 393 509s175-73 355-25 210-6 349-78 177-38 223-32v306H0Z" fill="#d5d8b4"/>
+    <path d="M723 302c-107 41 72 77-12 116-85 40-77 78 45 111l116 151h225c-72-53-72-96-192-133-118-35-208-51-154-91 104-79-91-96-28-154Z" fill="#b9d5d1"/>
+    <path d="M1320 412c-95-43-210-16-226 70-16 88-111 73-169 95-74 28-49 67-73 103h468Z" fill="#f3deb0"/>
+    <path d="M1320 450c-121-54-183 18-193 65-15 67-101 66-151 91-49 24-43 51-53 74h397Z" fill="url(#world-water)"/>
+    <g stroke="#e1eeea" stroke-width="2.5" stroke-linecap="round"><path d="M1192 518q22 10 44 0m-134 95q24 10 49 0m41-38q29 10 54 0m-81 75q24 10 51 0"/></g>
+    <path d="M165 588c-68-42-10-95 76-115s205 54 244 10-8-74 48-96 64 51 116 80 113 81 198 63 167 7 224 52" stroke="#eee1bb" stroke-width="35" stroke-linecap="round"/>
+    <path class="world-route-line" d="M165 588c-68-42-10-95 76-115s205 54 244 10-8-74 48-96 64 51 116 80 113 81 198 63 167 7 224 52" stroke="#9a8260" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 9"/>
+    <g class="world-trees" fill="#769774" stroke="#66836a" stroke-width="2">
+      <path d="m89 301-39 94h78Zm40 20-31 76h62Zm442-26-27 69h54Zm-437 143-39 91h77Zm713-170-31 76h62Z"/>
+      <path d="M89 375v43m40-36v31m442-60v30m-437 139v24m713-212v27" stroke="#867858" stroke-width="6"/>
+    </g>
+    <g transform="translate(211 370)" stroke="#6a705c" stroke-width="2" stroke-linejoin="round">
+      <path d="M0 51 77 0l79 51" fill="#b77961"/><path d="M12 49h132v108H12Z" fill="#f5e9c9"/>
+      <path d="M144 157h18V63l-18-14Z" fill="#d8cba9"/><path d="M12 49h132v13H12Z" fill="#a96c59"/>
+      <path d="M28 78h38v37H28Zm65 0h32v37H93Z" fill="#a4bec1"/>
+      <path d="M47 78v37m-19-18h38m43-19v37m-16-18h32" stroke="#fffae9"/>
+      <path d="M62 123h39v34H62Z" fill="#7f9a8e"/><circle cx="93" cy="140" r="2" fill="#f7db93"/>
+      <path d="M91 2v-22h18v33" fill="#d6b48c"/><path d="M85-20h30" stroke-width="5"/>
+      <path d="M53 43h50" stroke="#f6d8a4" stroke-width="4"/>
+      <path d="M97-41c-16-13 9-15-2-29" stroke="#fef9ec" stroke-width="9" stroke-linecap="round"/>
+    </g>
+    <g class="world-balloon" transform="translate(615 120)">
+      <path d="M-21 7c-43-48 2-87 35-64 26 20 10 52-4 64Z" fill="#c98670"/>
+      <path d="M-10 7c-21-48-2-80 13-68C18-39 11-9 1 7Z" fill="#edcf96"/>
+      <path d="m-17 10 5 16m18-16-5 16" stroke="#847257" stroke-width="2"/><path d="M-13 26H3l-2 13h-12Z" fill="#967e5f"/>
+    </g>
+    <g transform="translate(575 340)" stroke="#79654e" stroke-width="2" stroke-linejoin="round">
+      <path d="M0 45 75 5l75 40" fill="#8d9e82"/><path d="M9 43h132v124H9Z" fill="#f8e7bd"/>
+      <path d="M18 69h114l12 25H6Z" fill="#ce8673"/><path d="m29 69-3 25m31-25-1 25m30-25 3 25m21-25 7 25" stroke="#fae7c0" stroke-width="13"/>
+      <path d="M23 107h45v40H23Zm65-1h35v61H88Z" fill="#b4c8bd"/><path d="M45 107v40m-22-20h45" stroke="#fff7df"/>
+      <rect x="36" y="37" width="77" height="22" rx="3" fill="#fbf3dd"/>
+      <path d="M56 48h36m-29-5v10m10-10v10m10-10v10" stroke="#b88164"/>
+      <path d="M-20 174h61m-31-32v32m-11-31h22" stroke="#8c7b5a" stroke-width="4"/>
+      <ellipse cx="10" cy="141" rx="25" ry="6" fill="#ebd9ae"/>
+      <path d="M-8 121h12v12H-8Z" fill="#c98670"/><path d="M4 123c9-2 9 8 0 8"/>
+      <path d="M110 153h43v14h-43Z" fill="#9baf7f"/><path d="m116 153 5-16 6 16 7-20 6 20" stroke="#6d8a6d" stroke-width="4"/>
+    </g>
+    <g transform="translate(912 224)" stroke="#7c7669" stroke-width="2" stroke-linejoin="round">
+      <path d="M0 76h58v143H0Z" fill="#e5bd92"/><path d="M58 28h62v191H58Z" fill="#b6b7c4"/>
+      <path d="M120 106h78v113h-78Z" fill="#e6c8a4"/><path d="M198 57h54v162h-54Z" fill="#a7bdb7"/>
+      <path d="m56 28 33-25 33 25M209 57V32h31v25" fill="#8f9fa1"/>
+      <g stroke="#fff4d9" stroke-width="7"><path d="M15 98h27m-27 23h27m-27 23h27m-27 23h27m-27 23h27M73 53h31M73 79h31M73 105h31M73 131h31M73 157h31M73 183h31m31-55h48m-48 27h48m-48 27h48m30-99h25m-25 27h25m-25 27h25m-25 27h25m-25 27h25"/></g>
+      <path d="M132 219v-23h23v23m8 0v-23h23v23" fill="#b17f78"/>
+      <path d="M-12 220h280" stroke="#9c9275" stroke-width="5" stroke-linecap="round"/>
+    </g>
+    <g transform="translate(1146 444)" stroke="#777557" stroke-linecap="round">
+      <path d="M0 103C5 58 6 25-4 0" stroke-width="8"/>
+      <path d="M-3 4c-29-32-59-9-63 10C-34-2-20 0-3 4Zm0 0c22-38 53-24 65-5C29-10 13-2-3 4Zm0 0c-5-38-29-44-45-31C-21-22-17-7-3 4Zm0 0c18-20 36-1 35 18C19 7 11 6-3 4Z" fill="#7d9d7b" stroke-width="2"/>
+      <path d="m-81 96 15-32 26 32m-38-25 22 14m-24 12h51" stroke="#ad8261" stroke-width="4"/>
+    </g>
+    <g fill="#f6e7b6"><circle cx="398" cy="547" r="5"/><circle cx="410" cy="534" r="4"/><circle cx="386" cy="535" r="4"/><circle cx="816" cy="394" r="4"/><circle cx="828" cy="402" r="5"/></g>
+    <path d="M0 0h1320v680H0z" fill="url(#world-grain)"/>
+  </svg>`;
+}
+
+function worldOpening() {
+  const stops = [
+    { id: "little-me", name: "Little me", note: "where it all began", icon: "curiosity", className: "world-childhood" },
+    { id: "developer-life", name: "Build mode: on", note: "a life in open tabs", icon: "laptop", className: "world-developer" },
+    { id: "the-detours", name: "The scenic route", note: "beyond the screen", icon: "mountain", className: "world-travel" },
+    { id: "city-colours", name: "A little city colour", note: "look a little closer", icon: "city", className: "world-city" },
+    { id: "at-the-table", name: "Stay for a bite", note: "follow your appetite", icon: "coffee", className: "world-food" },
+    { id: "little-things", name: "The little in-between", note: "nowhere else to be", icon: "leaf", className: "world-everyday" },
+  ];
+  return `<section class="world-opening" aria-labelledby="world-title">
+    <div class="world-intro wrap"><span class="eyebrow">DEVELOPER BY PROFESSION. EXPLORER AT HEART.</span><h1 id="world-title">same curiosity.<br><em>bigger world.</em></h1><p>I'm Ketki. I build software, follow my appetite, and find stories around the world. This little world? It's made of all those things.</p><a class="pill" href="#little-me">Start at the beginning ${arrow}</a><span class="world-invitation">or take a little detour below ↓</span></div>
+    <div class="world-scene" id="curious-world">
+      ${illustratedWorld()}
+      <div class="world-scene-caption"><span class="eyebrow">A LITTLE MAP OF WHAT MAKES ME, ME</span><span>not to scale. very much to heart.</span></div>
+      <figure class="world-film hero-film">${video("waterfall-pause")}<button class="hero-play" data-action="hero-play" aria-label="Play the waterfall moment" aria-pressed="false">▶ Play moment</button><figcaption class="photo-label">a little pause.</figcaption><span class="pencil-tape" aria-hidden="true"></span></figure>
+      <nav class="world-stops" aria-label="Explore Ketki's illustrated world">${stops.map((stop, index) => `<a href="#${stop.id}" class="world-stop ${stop.className}">${stop.id === "little-me" ? littleExplorer("world-little-me") : chapterIcon(stop.icon)}<span><small>0${index + 1} / ${stop.note}</small><strong>${stop.name}</strong></span><span class="world-stop-arrow" aria-hidden="true">↗</span></a>`).join("")}</nav>
+      <div class="world-scene-footer"><span>different little places. the same curious me.</span><button class="world-motion" data-action="world-motion" aria-pressed="false" aria-controls="curious-world">Ⅱ Pause scene motion</button></div>
+    </div>
+    <div class="world-paper-edge" aria-hidden="true"></div>
+  </section>`;
+}
+
+function chapterMap() {
+  return `<nav class="chapter-map" aria-label="Life story chapter map"><span class="chapter-map-title">follow the thread ${scribble}</span><ol>${storyChapters.map((chapter, index) => `<li><a href="#${chapter.id}" data-chapter="${chapter.id}"${index === 0 ? ' aria-current="location"' : ""}>${chapterIcon(chapter.icon)}<span><small>0${index + 1}</small>${chapter.label}</span></a></li>`).join("")}</ol></nav>`;
+}
+
 function image(id, options = {}) {
   const asset = photoLibrary[id];
   if (!asset) throw new Error(`Unknown portfolio photo: ${id}`);
@@ -124,6 +241,7 @@ function cityPages() {
 function lifeStory() {
   return `<section class="life-story" id="selected-work"><div class="wrap">
     <header class="life-introduction"><span class="eyebrow">NOT A STRAIGHT LINE. A VERY PERSONAL ONE.</span><h2>Every story<br><em>starts somewhere.</em></h2><p>Mine starts with a little curiosity. It still does, really.</p>${pencilTrail}</header>
+    ${chapterMap()}
     <div class="life-chapters">
       <div class="story-route" aria-hidden="true">${littleExplorer("wandering-me")}</div>
       <article class="life-chapter childhood-chapter" id="little-me">
@@ -251,22 +369,7 @@ function renderPortfolio() {
       <a href="#portfolio" class="wordmark" aria-label="Ketki, portfolio home">Ketki<span aria-hidden="true"> ✳</span><small>stories, near & far</small></a>
       <nav class="nav-links" aria-label="Portfolio navigation"><a href="#selected-work">My story</a><a href="#the-detours">The detours</a><a href="#about-creator">Say hello</a><button class="pill" data-action="collab">Let's create ${arrow}</button></nav>
     </header></div>
-    <section class="scrap-hero wrap">
-      <div class="scrap-copy"><div class="eyebrow">DEVELOPER BY PROFESSION. EXPLORER AT HEART.</div>
-        <h1>same curiosity.<br><em>bigger world.</em></h1>
-        <p class="intro">I'm Ketki. I build software, follow my appetite, and find stories around the world. Different sides of me. One ongoing adventure.</p>
-        <a class="pill" href="#selected-work">Let me tell you a story ${arrow}</a>
-        <a class="hero-little-me" href="#little-me">${littleExplorer()}<span>This curiosity?<br>It started early.</span>${scribble}</a>
-      </div>
-      <div class="scrap-collage" aria-label="A moving forest moment, a coffee detail and a sweeping coastline">
-        <div class="collage-note handwritten">a place. a taste.<br>a little feeling.${scribble}</div>
-        <figure class="polaroid primary hero-film">${video("waterfall-pause")}<button class="hero-play" data-action="hero-play" aria-label="Play the waterfall moment" aria-pressed="false">▶ Play moment</button><span class="tape" aria-hidden="true"></span><figcaption class="photo-label">a little pause in the green <span>▶ ${durationLabel("waterfall-pause")}</span></figcaption></figure>
-        <button class="polaroid secondary" data-project="cafes" aria-label="Explore café stories">${image("1328", { eager: true })}<span class="photo-label">but first, this.</span></button>
-        <button class="polaroid tertiary" data-project="ocean" aria-label="Explore coastal stories">${image("1002", { eager: true })}<span class="tape" aria-hidden="true"></span><span class="photo-label">nowhere else to be</span></button>
-        <div class="round-stamp"><span>CURIOUS HEART</span>${star()}<span>STORIES EVERYWHERE</span></div>${star("collage-star")}<span class="scrap-caption">a little of how it felt.</span>
-      </div>
-    </section>
-    <div class="scrap-ticker"><span>Places to get lost in</span><b aria-hidden="true">✳</b><span>Plates to fall in love with</span><b aria-hidden="true">✳</b><span>Stories to take home</span><b aria-hidden="true">✳</b></div>
+    ${worldOpening()}
     ${lifeStory()}${memoriesSection()}${sideQuestsSection()}${collectionsSection()}
     <section class="end-note wrap" id="about-creator">
       <div class="creator-portrait">${image("0987", { sizes: "(max-width: 760px) 160px, 240px" })}</div>
@@ -437,9 +540,35 @@ document.querySelectorAll("main video").forEach(player => visibilityObserver.obs
 const journey = document.querySelector(".life-chapters");
 const wanderer = document.querySelector(".wandering-me");
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+let scenePaused = false;
+function syncSceneMotion() {
+  const paused = scenePaused || reducedMotion.matches;
+  document.querySelector(".world-opening").classList.toggle("motion-paused", paused);
+  const control = document.querySelector('[data-action="world-motion"]');
+  control.disabled = reducedMotion.matches;
+  control.setAttribute("aria-pressed", String(paused));
+  control.textContent = reducedMotion.matches ? "Scene motion off · reduced motion" : paused ? "▷ Resume scene motion" : "Ⅱ Pause scene motion";
+}
+document.querySelector('[data-action="world-motion"]').addEventListener("click", () => {
+  scenePaused = !scenePaused;
+  syncSceneMotion();
+});
+reducedMotion.addEventListener("change", syncSceneMotion);
+syncSceneMotion();
+const chapterLinks = [...document.querySelectorAll("[data-chapter]")];
+const chapterSections = storyChapters.map(chapter => document.getElementById(chapter.id));
 let journeyFrame = null;
-function updateWanderer() {
+function updateStoryPosition() {
   journeyFrame = null;
+  const chapterLine = Math.min(180, innerHeight * .3);
+  let currentChapter = chapterSections[0];
+  chapterSections.forEach(section => {
+    if (section.getBoundingClientRect().top <= chapterLine) currentChapter = section;
+  });
+  chapterLinks.forEach(link => {
+    if (link.dataset.chapter === currentChapter.id) link.setAttribute("aria-current", "location");
+    else link.removeAttribute("aria-current");
+  });
   if (reducedMotion.matches || getComputedStyle(wanderer.parentElement).display === "none") {
     wanderer.style.transform = "";
     return;
@@ -448,11 +577,11 @@ function updateWanderer() {
   const offset = Math.min(bounds.height - wanderer.offsetHeight, Math.max(0, innerHeight * 0.55 - bounds.top));
   wanderer.style.transform = `translateY(${offset}px) rotate(${Math.sin(offset / 140) * 4}deg)`;
 }
-function scheduleWanderer() {
-  if (journeyFrame === null) journeyFrame = requestAnimationFrame(updateWanderer);
+function scheduleStoryPosition() {
+  if (journeyFrame === null) journeyFrame = requestAnimationFrame(updateStoryPosition);
 }
-window.addEventListener("scroll", scheduleWanderer, { passive: true });
-window.addEventListener("resize", scheduleWanderer);
-reducedMotion.addEventListener("change", scheduleWanderer);
-scheduleWanderer();
+window.addEventListener("scroll", scheduleStoryPosition, { passive: true });
+window.addEventListener("resize", scheduleStoryPosition);
+reducedMotion.addEventListener("change", scheduleStoryPosition);
+scheduleStoryPosition();
 if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
