@@ -370,7 +370,7 @@ function collectionsSection() {
 function renderPortfolio() {
   document.querySelector("#portfolio").innerHTML = `<article class="theme scrapbook">
     <div class="wrap"><header class="page-nav">
-      <a href="#portfolio" class="wordmark" aria-label="Ketki, portfolio home">Ketki<span aria-hidden="true"> ✳</span><small>stories, near & far</small></a>
+      <a href="#portfolio" class="wordmark" aria-label="Ketki Fadnavis, portfolio home">Ketki Fadnavis<small>stories, near & far</small></a>
       <nav class="nav-links" aria-label="Portfolio navigation"><a href="#selected-work">My story</a><a href="#travel-atlas">Travel map</a><a href="#about-creator">Say hello</a><button class="pill" data-action="collab">Let's create ${arrow}</button></nav>
     </header></div>
     ${worldOpening()}
