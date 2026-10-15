@@ -343,7 +343,11 @@ function sideQuestsSection() {
 }
 
 function contactLinks() {
-  return `<div class="contact-links" aria-label="Contact Ketki"><a href="mailto:ketkifadnavis05@gmail.com"><span class="eyebrow">DROP ME A NOTE</span><span>ketkifadnavis05@gmail.com ${arrow}</span></a><a href="https://www.instagram.com/ketki_fadnavis/" target="_blank" rel="noopener noreferrer"><span class="eyebrow">THE EVERYDAY ADVENTURES</span><span>@ketki_fadnavis on Instagram ${arrow}</span><span class="contact-new-tab">opens in a new tab</span></a><a href="https://www.linkedin.com/in/ketki-fadnavis-b8aa60166" target="_blank" rel="noopener noreferrer"><span class="eyebrow">THE DEVELOPER SIDE OF ME</span><span>Find me on LinkedIn ${arrow}</span><span class="contact-new-tab">opens in a new tab</span></a></div>`;
+  return `<div class="contact-links" aria-label="Contact Ketki">
+    <a href="mailto:ketkifadnavis05@gmail.com"><span class="eyebrow">DROP ME A NOTE</span><span><svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>ketkifadnavis05@gmail.com</span>${arrow}</span></a>
+    <a href="https://www.instagram.com/ketki_fadnavis/" target="_blank" rel="noopener noreferrer"><span class="eyebrow">THE EVERYDAY ADVENTURES</span><span><svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg><span>@ketki_fadnavis on Instagram</span>${arrow}</span><span class="contact-new-tab">opens in a new tab</span></a>
+    <a href="https://www.linkedin.com/in/ketki-fadnavis-b8aa60166" target="_blank" rel="noopener noreferrer"><span class="eyebrow">THE DEVELOPER SIDE OF ME</span><span><svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M4 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4zm2 6a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm-1.5 2H7v9H4.5v-9zm5 0H12v1.2c.7-1 1.7-1.5 3-1.5 2.5 0 4 1.5 4 4.3v5h-2.5v-4.7c0-1.5-.6-2.3-1.8-2.3-1.3 0-2.7.9-2.7 2.5V19H9.5v-9z"/></svg><span>Find me on LinkedIn</span>${arrow}</span><span class="contact-new-tab">opens in a new tab</span></a>
+  </div>`;
 }
 
 function filteredStories() {
