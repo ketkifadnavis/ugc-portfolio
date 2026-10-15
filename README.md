@@ -4,6 +4,10 @@ A personal travel, food and lifestyle story, built with HTML, CSS and JavaScript
 The opening is an original illustrated world with six landmarks linking to the
 story. A sticky five-chapter map follows the narrative without hijacking scrolling.
 Scene motion can be paused and respects the system's reduced-motion preference.
+Silent films play muted when prominently in view or hovered, with only one playing
+at a time. They pause offscreen or in a hidden tab; manual pauses are respected
+until the film leaves view. Reduced motion keeps playback manual. Popup journals
+preserve photo proportions in a masonry gallery, with a single column on phones.
 
 **Website:** https://ketkifadnavis.github.io/ugc-portfolio/
 
@@ -16,6 +20,8 @@ streaming and seeking; GitHub Pages serves the published site as static files.
 ## Publishing updates
 
 Push changes to `main`. GitHub Pages publishes the repository root automatically.
+Refresh the affected asset version queries in `index.html` when updating browser
+code or styles so returning visitors do not mix cached and updated files.
 In Settings > Pages, the source is **Deploy from a branch**, **main**, **/ (root)**.
 The `.nojekyll` file disables Jekyll processing.
 

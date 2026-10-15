@@ -62,13 +62,13 @@ const cityPhotos = {
     "width" : 1920
   },
   "2241" : {
-    "alt" : "Ketki beside a playful mural of a woman leaning out of painted shutters in Malaysia",
+    "alt" : "Ketki beside a playful mural of a woman leaning out of painted shutters",
     "category" : "City & art",
     "height" : 1440,
     "position" : "50% 50%",
     "src" : "assets/photos/city-malaysia-painted-street.jpg",
     "srcset" : "assets/photos/city-malaysia-painted-street-480w.jpg 480w, assets/photos/city-malaysia-painted-street-960w.jpg 960w, assets/photos/city-malaysia-painted-street.jpg 1920w",
-    "title" : "A little mischief on a Malaysian street",
+    "title" : "A little mischief on a painted street",
     "width" : 1920
   }
 };

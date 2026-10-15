@@ -4,7 +4,7 @@ const projects = {
   ocean: { title: "Salt in the air", label: "Travel / A slower kind of escape", photo: "1002", photos: ["1182", "0969", "0983", "1297", "1295", "0412"], video: "soft-surf", type: "travel", category: "TRAVEL", idea: "Bare feet, soft surf, and the sort of blue you wish you could bottle. I came for the coastline and stayed for the feeling of having nowhere else to be." },
   cafes: { title: "One more coffee?", label: "Food & lifestyle / Little rituals", photo: "1328", photos: ["1085", "0771", "2277", "0595", "1468"], type: "food", category: "FOOD & LIFESTYLE", idea: "A seat by the window. Something warm in a good cup. The places where a quick stop turns into the best part of the afternoon." },
   city: { title: "Take the long way", label: "Travel / City-side discoveries", photo: "1778", photos: ["1735", "1671", "1685", "1114", "2384", "1392"], video: "city-after-dark", type: "travel", category: "TRAVEL", idea: "Big city views, tiny discoveries, and all the reasons I never quite stick to the itinerary. I like to see a place in daylight, then meet it all over again after dark." },
-  colour: { title: "A city, a little differently", label: "Travel / Malaysia, murals & little details", photo: "2241", photos: ["1598", "1753", "2002", "2027", "1443", "0545", "2004"], type: "travel", category: "CITY LIFE & COLOUR", idea: "A playful painted window in Malaysia. Streets stretching between the buildings in Singapore. A ceiling that makes me stop and look up. Different places, the same little habit: noticing the character in the corners, not only the landmarks." },
+  colour: { title: "A city, a little differently", label: "Travel / Murals & little details", photo: "2241", photos: ["1598", "1753", "2002", "2027", "1443", "0545", "2004"], type: "travel", category: "CITY LIFE & COLOUR", idea: "A playful painted window. Streets stretching between the buildings. A ceiling that makes me stop and look up. Different places, the same little habit: noticing the character in the corners, not only the landmarks." },
   mountain: { title: "A change of altitude", label: "Travel / Into the green", photo: "1461", photos: ["2548", "0902", "0896", "1834", "0642", "2523"], type: "travel", category: "TRAVEL", idea: "Tea-green hills, mountain air, and the joy of putting the phone away—after one more photograph. These are the places where I remember to take my time." },
   table: { title: "Worth a second bite", label: "Food / Color on the table", photo: "1447", photos: ["1252", "0638", "1707", "2010", "1952"], video: "something-sweet", type: "food", category: "FOOD", idea: "I follow my appetite as often as the map. A beautifully plated meal, a street-side sweet, a familiar comfort: the food is part of how I get to know a place." },
   noodles: { title: "Follow your appetite", label: "Food / A very good detour", photo: "2324", photos: ["2010", "1252", "1447"], type: "food", category: "FOOD", idea: "Some travel memories come in a bowl. A small collection of comforting plates, warm tables, and very good reasons to take a food detour." },
@@ -63,12 +63,15 @@ let storiesExpanded = false;
 let dialogTrigger = null;
 const dialog = document.querySelector("#detail-dialog");
 const photoLibrary = { ...portfolioPhotos, ...lifePhotos, ...cityPhotos };
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const videoStates = new Map();
+let activeVideo = null;
 
 const memories = [
-  { photo: "1598", project: "colour", type: "city", title: "Between the buildings", detail: "Singapore / taking the long way" },
+  { photo: "1598", project: "colour", type: "city", title: "Between the buildings", detail: "Taking the long way home" },
   { photo: "1447", project: "table", type: "food", title: "A very good reason to stop", detail: "A table full of colour" },
   { photo: "2039", project: "quiet", type: "lifestyle", title: "A little good light", detail: "No big plans required" },
-  { photo: "2241", project: "colour", type: "city", title: "A little mischief in Malaysia", detail: "A painted window. A real memory." },
+  { photo: "2241", project: "colour", type: "city", title: "A little street-side mischief", detail: "A painted window. A real memory." },
   { photo: "1328", project: "cafes", type: "food", title: "But first, this", detail: "The smallest daily adventure" },
   { photo: "0545", project: "colour", type: "city", title: "Remember to look up", detail: "Art isn't always in a gallery" },
   { photo: "1234", project: "lifestyle", type: "lifestyle", title: "The happy in-between", detail: "Little life, fully appreciated" },
@@ -85,7 +88,7 @@ const cameraDrawing = `<svg viewBox="0 0 220 160" aria-hidden="true"><path fill=
 const coffeeDrawing = `<svg viewBox="0 0 200 160" aria-hidden="true"><ellipse cx="91" cy="137" rx="70" ry="12" fill="#c9b8ce"/><path d="M134 47c55-7 60 61 5 64" fill="none" stroke="#c293ac" stroke-width="15"/><path d="M34 44h114l-12 78c-3 20-88 20-90 0z" fill="#e3adc6"/><ellipse cx="91" cy="44" rx="57" ry="18" fill="#f7d6df"/><ellipse cx="91" cy="43" rx="46" ry="12" fill="#8d6654"/><path d="M90 43c-19-18-27 5 0 9 27-4 19-27 0-9" fill="#edd9b7"/><path d="M71 23c-14-15 14-14 1-29m36 28c-14-15 14-14 1-29" fill="none" stroke="#b79ec3" stroke-width="4" stroke-linecap="round"/></svg>`;
 const questNotes = {
   camera: { title: "Look up. Look closer.", copy: "The carved ceilings and colourful corners I almost walked past. This is my kind of treasure hunt.", label: "THE CAMERA / A DIFFERENT PERSPECTIVE", photo: "1443", project: "colour" },
-  postcard: { title: "Hello from Malaysia.", copy: "A painted window, a little mischief, and a reminder that the best travel moments don't always need a grand view.", label: "THE POSTCARD / A HAPPY LITTLE DETOUR", photo: "2241", project: "colour" },
+  postcard: { title: "Hello from the detour.", copy: "A painted window, a little mischief, and a reminder that the best travel moments don't always need a grand view.", label: "THE POSTCARD / A HAPPY LITTLE DETOUR", photo: "2241", project: "colour" },
   coffee: { title: "Make room for a little ritual.", copy: "A good cup, a slower afternoon, and absolutely no hurry to leave. Not every detour needs a boarding pass.", label: "THE COFFEE / STAY A LITTLE LONGER", photo: "1328", project: "cafes" },
 };
 let activeQuest = "postcard";
@@ -216,7 +219,7 @@ function image(id, options = {}) {
 function video(id) {
   const asset = portfolioVideos[id];
   if (!asset) throw new Error(`Unknown portfolio video: ${id}`);
-  return `<video controls playsinline preload="none" poster="${asset.poster}" width="${asset.width}" height="${asset.height}" aria-label="${asset.title}. ${asset.description}. Silent video.">
+  return `<video controls muted playsinline preload="none" poster="${asset.poster}" width="${asset.width}" height="${asset.height}" aria-label="${asset.title}. ${asset.description}. Silent video.">
     <source src="${asset.src}" type="video/mp4">
     <p>Your browser cannot play this video. <a href="${asset.src}">Open the clip</a>.</p>
   </video>`;
@@ -232,8 +235,8 @@ function littleExplorer(className = "") {
 
 function cityPages() {
   return `<aside class="city-pages" id="city-colours" aria-labelledby="city-title">
-    <div class="city-intro"><span class="eyebrow">ANOTHER PAGE FROM THE SAME CURIOUS LIFE</span><h3 id="city-title">Not just the view.<br><em>The character.</em></h3><p>I love the big landscapes. But give me a city with a little personality, and I'll happily take the long way home.</p><p>Painted walls in Malaysia. A skyline between the clouds. A tiny detail I nearly missed. There's a different kind of adventure here, too.</p><button class="story-text-link" data-project="colour">Follow the colours ${arrow}</button><span class="chapter-scribble">sometimes the wall has a story, too.</span></div>
-    <button class="city-postcard" data-project="colour" data-photo="2241" aria-label="Open my Malaysia street-art story">${image("2241", { sizes: "(max-width: 760px) calc(100vw - 64px), 540px" })}<span class="city-postcard-caption"><span class="eyebrow">MALAYSIA / A HAPPY LITTLE DETOUR</span><span>me, making friends with the scenery.</span>${arrow}</span><span class="pencil-tape" aria-hidden="true"></span></button>
+    <div class="city-intro"><span class="eyebrow">ANOTHER PAGE FROM THE SAME CURIOUS LIFE</span><h3 id="city-title">Not just the view.<br><em>The character.</em></h3><p>I love the big landscapes. But give me a city with a little personality, and I'll happily take the long way home.</p><p>Painted walls. A skyline between the clouds. A tiny detail I nearly missed. There's a different kind of adventure here, too.</p><button class="story-text-link" data-project="colour">Follow the colours ${arrow}</button><span class="chapter-scribble">sometimes the wall has a story, too.</span></div>
+    <button class="city-postcard" data-project="colour" data-photo="2241" aria-label="Open my street-art story">${image("2241", { sizes: "(max-width: 760px) calc(100vw - 64px), 540px" })}<span class="city-postcard-caption"><span class="eyebrow">A HAPPY LITTLE DETOUR</span><span>me, making friends with the scenery.</span>${arrow}</span><span class="pencil-tape" aria-hidden="true"></span></button>
     <div class="city-contact-sheet"><button data-project="colour" data-photo="1753" aria-label="Explore my Singapore skyline photograph">${image("1753")}<span>the city takes a breath.</span></button><button data-project="colour" data-photo="0545" aria-label="Explore the painted ceiling photograph">${image("0545")}<span>and then I remember to look up.</span></button></div>
   </aside>`;
 }
@@ -258,21 +261,21 @@ function lifeStory() {
       </article>
       <div class="chapter-bridge"><span>close a tab.<br>open a little world.</span>${scribble}</div>
       <article class="life-chapter travel-chapter" id="the-detours">
-        <div class="chapter-visual"><figure class="chapter-film landscape-film">${video("river-bends")}<figcaption>PLAY ${durationLabel("river-bends")} / the scenic route, in motion.</figcaption></figure><figure class="photo-print travel-inset">${image("2232", { sizes: "240px" })}<figcaption>no rush to be anywhere else.</figcaption></figure></div>
+        <div class="chapter-visual"><figure class="chapter-film landscape-film">${video("river-bends")}<figcaption>FILM ${durationLabel("river-bends")} / the scenic route, in motion.</figcaption></figure><figure class="photo-print travel-inset">${image("2232", { sizes: "240px" })}<figcaption>no rush to be anywhere else.</figcaption></figure></div>
         <div class="chapter-copy"><span class="eyebrow">03 / BEYOND THE SCREEN</span><h3>The world<br><em>keeps calling.</em></h3><p>And I keep finding reasons to go. A winding river. An unfamiliar street. A view that makes the early start feel worth it.</p><p>Near or far, I want to know what a place feels like—not just what it looks like on a map.</p><button class="story-text-link" data-project="boat">Come a little further ${arrow}</button><span class="chapter-scribble">little me would approve of this detour.</span></div>
       </article>
       ${cityPages()}
       <aside class="evening-interlude">
-        <figure class="chapter-film">${video("city-after-dark")}<figcaption>PLAY ${durationLabel("city-after-dark")} / a city, after dark.</figcaption></figure>
+        <figure class="chapter-film">${video("city-after-dark")}<figcaption>FILM ${durationLabel("city-after-dark")} / a city, after dark.</figcaption></figure>
         <div><span class="eyebrow">AND SOMETIMES...</span><p>“Just one more stop”<br>becomes the best<br><em>part of the day.</em></p><span class="handwritten">I blame the lights.</span>${star()}</div>
       </aside>
       <article class="life-chapter food-chapter" id="at-the-table">
-        <div class="chapter-visual food-visual"><figure class="chapter-film food-film">${video("something-sweet")}<figcaption>PLAY ${durationLabel("something-sweet")} / a sweet little detour.</figcaption></figure><figure class="photo-print food-inset">${image("1447", { sizes: "240px" })}<figcaption>room for one more?</figcaption></figure></div>
+        <div class="chapter-visual food-visual"><figure class="chapter-film food-film">${video("something-sweet")}<figcaption>FILM ${durationLabel("something-sweet")} / a sweet little detour.</figcaption></figure><figure class="photo-print food-inset">${image("1447", { sizes: "240px" })}<figcaption>room for one more?</figcaption></figure></div>
         <div class="chapter-copy"><span class="eyebrow">04 / FOLLOW THE APPETITE</span><h3>A place makes<br><em>more sense over food.</em></h3><p>The street-side stops. The first bite of something new. The café where a quick coffee turns into a whole afternoon.</p><p>Food is never a separate part of the journey for me. It's how I settle into it.</p><button class="story-text-link" data-project="table">Pull up a chair ${arrow}</button><span class="chapter-scribble">a very important part of my research.</span></div>
       </article>
       <div class="chapter-bridge"><span>but life isn't<br>only the big trips...</span>${scribble}</div>
       <article class="life-chapter everyday-chapter" id="little-things">
-        <div class="chapter-visual"><figure class="chapter-film landscape-film">${video("soft-surf")}<figcaption>PLAY ${durationLabel("soft-surf")} / nowhere else I need to be.</figcaption></figure><div class="everyday-details"><figure class="photo-print">${image("1328", { sizes: "180px" })}<figcaption>a little ritual.</figcaption></figure><figure class="photo-print">${image("2039", { sizes: "180px" })}<figcaption>a little good light.</figcaption></figure></div></div>
+        <div class="chapter-visual"><figure class="chapter-film landscape-film">${video("soft-surf")}<figcaption>FILM ${durationLabel("soft-surf")} / nowhere else I need to be.</figcaption></figure><div class="everyday-details"><figure class="photo-print">${image("1328", { sizes: "180px" })}<figcaption>a little ritual.</figcaption></figure><figure class="photo-print">${image("2039", { sizes: "180px" })}<figcaption>a little good light.</figcaption></figure></div></div>
         <div class="chapter-copy"><span class="eyebrow">05 / THE LIFE IN BETWEEN</span><h3>Not every story<br><em>needs a suitcase.</em></h3><p>A good cup. Light through the trees. A moment with no particular plan. I want to notice those things, too.</p><p>That's the thread through all of this: less about collecting places, more about paying attention.</p><button class="story-text-link" data-project="quiet">Stay for the little things ${arrow}</button><span class="chapter-scribble">still curious. still looking around.</span></div>
       </article>
     </div>
@@ -330,7 +333,7 @@ function sideQuestsSection() {
     <div class="quest-stage">
       <svg class="quest-route" viewBox="0 0 1020 440" preserveAspectRatio="none" aria-hidden="true"><path d="M140 143C260 36 300 250 465 138S707 38 855 142 680 384 465 330 160 285 140 143" stroke="currentColor" stroke-dasharray="5 8" stroke-width="1.5" fill="none"/></svg>
       <button class="quest-object quest-camera" data-quest="camera" aria-pressed="${activeQuest === "camera"}" aria-controls="quest-notebook">${cameraDrawing}<span class="object-label">01 / FIND THE FRAME ↗</span></button>
-      <button class="quest-object quest-postcard" data-quest="postcard" aria-pressed="${activeQuest === "postcard"}" aria-controls="quest-notebook"><span class="postcard-image">${image("2241")}</span><span class="object-label">02 / A POSTCARD FROM MALAYSIA ↗</span></button>
+      <button class="quest-object quest-postcard" data-quest="postcard" aria-pressed="${activeQuest === "postcard"}" aria-controls="quest-notebook"><span class="postcard-image">${image("2241")}</span><span class="object-label">02 / A POSTCARD FROM THE DETOUR ↗</span></button>
       <button class="quest-object quest-coffee" data-quest="coffee" aria-pressed="${activeQuest === "coffee"}" aria-controls="quest-notebook">${coffeeDrawing}<span class="object-label">03 / STAY FOR A SIP ↗</span></button>
       ${star("quest-spark one")}${star("quest-spark two")}
       <div class="quest-notebook" id="quest-notebook" aria-live="polite" aria-atomic="true">${questNote()}</div>
@@ -401,6 +404,7 @@ function showDialog(content, trigger) {
   document.querySelector("#dialog-content").innerHTML = content;
   dialog.showModal();
   document.body.style.overflow = "hidden";
+  observeVideos(dialog);
 }
 
 function showProject(id, trigger) {
@@ -413,14 +417,88 @@ function showProject(id, trigger) {
     <div class="eyebrow">${project.category} / NEAR & FAR</div><h2 id="dialog-title">${project.title}</h2>
     <p class="journal-personal-note">${personalNotes[id]}</p><p>${project.idea}</p>
     ${project.video ? `<figure class="journal-film">${video(project.video)}<figcaption>${portfolioVideos[project.video].description}. A silent moment from the journey.</figcaption></figure>` : ""}
-    <div class="journal-gallery">${photos.filter(photo => photo !== lead).map(photo => `<figure>${image(photo)}<figcaption>${photoLibrary[photo].title}</figcaption></figure>`).join("")}</div>
+    <div class="journal-gallery">${photos.filter(photo => photo !== lead).map(photo => `<figure>${image(photo, { sizes: "(max-width: 520px) calc(100vw - 80px), (max-width: 760px) calc((100vw - 90px) / 2), 344px" })}<figcaption>${photoLibrary[photo].title}</figcaption></figure>`).join("")}</div>
     <p class="photo-credit" style="margin-top:24px">Original photography and footage from my travels and everyday life.</p>
   </div>`, trigger);
 }
 
 function pauseVideos(except = null) {
   document.querySelectorAll("video").forEach(player => {
-    if (player !== except) player.pause();
+    if (player !== except) pauseVideo(player);
+  });
+}
+
+function pauseVideo(player) {
+  if (player.paused) return;
+  const state = videoStates.get(player);
+  if (state) state.controllerPause = true;
+  player.pause();
+}
+
+function startVideo(player, automatic = false) {
+  const state = videoStates.get(player);
+  if (state.pending || !player.paused) return;
+  state.pending = true;
+  state.automatic = automatic;
+  if (automatic) player.muted = true;
+  player.play().catch(error => {
+    if (error instanceof DOMException && error.name === "AbortError" && player.paused) return;
+    state.blocked = true;
+    const restricted = automatic && error instanceof DOMException && error.name === "NotAllowedError";
+    if (restricted) console.info("Automatic playback is restricted by the browser:", error);
+    else console.error("Could not start the portfolio video:", error);
+    if (!player.isConnected) return;
+    const notice = document.createElement("p");
+    notice.className = "playback-notice";
+    notice.setAttribute("role", restricted ? "status" : "alert");
+    notice.textContent = restricted ? "Tap the play control to watch this moment." : "Playback could not start. Please try the video controls or refresh the page.";
+    player.parentElement.querySelector(".playback-notice")?.remove();
+    player.after(notice);
+    player.closest(".hero-film")?.classList.remove("is-expanded");
+  }).finally(() => {
+    state.pending = false;
+  });
+}
+
+function updateVideoPlayback() {
+  const candidates = [];
+  videoStates.forEach((state, player) => {
+    const available = player.isConnected && !document.hidden && (dialog.open ? dialog.contains(player) : !dialog.contains(player));
+    if (!available || state.ratio === 0 || (reducedMotion.matches && state.automatic)) pauseVideo(player);
+    if (available && !reducedMotion.matches && !state.userPaused && !state.completed && !state.blocked &&
+        ((state.hovered && state.ratio > 0) || state.ratio >= .55)) candidates.push(player);
+  });
+  candidates.sort((a, b) => {
+    const first = videoStates.get(a);
+    const second = videoStates.get(b);
+    return Number(second.hovered) - Number(first.hovered) ||
+      Number(b === activeVideo && !second.automatic) - Number(a === activeVideo && !first.automatic) ||
+      second.ratio - first.ratio ||
+      Math.abs(a.getBoundingClientRect().top + a.clientHeight / 2 - innerHeight / 2) -
+      Math.abs(b.getBoundingClientRect().top + b.clientHeight / 2 - innerHeight / 2);
+  });
+  const next = candidates[0];
+  if (activeVideo && videoStates.get(activeVideo)?.automatic && activeVideo !== next) pauseVideo(activeVideo);
+  if (next) startVideo(next, true);
+}
+
+function observeVideos(root) {
+  root.querySelectorAll("video").forEach(player => {
+    const state = { ratio: 0, hovered: false, userPaused: false, completed: false, blocked: false, pending: false, automatic: false, controllerPause: false };
+    videoStates.set(player, state);
+    const frame = player.closest("figure") || player;
+    frame.addEventListener("pointerenter", event => {
+      if (event.pointerType !== "mouse") return;
+      state.hovered = true;
+      state.completed = false;
+      updateVideoPlayback();
+    });
+    frame.addEventListener("pointerleave", event => {
+      if (event.pointerType !== "mouse") return;
+      state.hovered = false;
+      updateVideoPlayback();
+    });
+    visibilityObserver.observe(player);
   });
 }
 
@@ -451,16 +529,10 @@ document.addEventListener("click", event => {
     const player = button.closest(".hero-film").querySelector("video");
     if (!player) return;
     if (!player.paused) player.pause();
-    else player.play().catch(error => {
-      if (error instanceof DOMException && error.name === "AbortError" && player.paused) return;
-      console.error("Could not start the waterfall moment:", error);
-      const notice = document.createElement("p");
-      notice.className = "play-error";
-      notice.setAttribute("role", "alert");
-      notice.textContent = "Playback could not start. Please try the video controls or refresh the page.";
-      button.parentElement.querySelector(".play-error")?.remove();
-      button.after(notice);
-    });
+    else {
+      player.closest(".hero-film").classList.add("is-expanded");
+      startVideo(player);
+    }
   } else if (button.dataset.action === "shuffle-memories") {
     shuffleMemories();
   } else if (button.dataset.action === "more-stories") {
@@ -477,32 +549,62 @@ document.addEventListener("click", event => {
 });
 
 document.addEventListener("play", event => {
-  if (event.target instanceof HTMLVideoElement) {
-    pauseVideos(event.target);
-    syncHeroControl(event.target);
-  }
+  const player = event.target;
+  if (!(player instanceof HTMLVideoElement) || player.paused) return;
+  const state = videoStates.get(player);
+  if (!state) return;
+  if (!state.pending) state.automatic = false;
+  state.userPaused = false;
+  state.completed = false;
+  state.blocked = false;
+  activeVideo = player;
+  player.parentElement.querySelector(".playback-notice")?.remove();
+  pauseVideos(player);
+  syncHeroControl(player);
 }, true);
 function syncHeroControl(player) {
   const hero = player.closest(".hero-film");
   if (!hero) return;
   const playing = !player.paused && !player.ended;
   hero.classList.toggle("is-playing", playing);
+  if (!playing) hero.classList.remove("is-expanded");
   const button = hero.querySelector(".hero-play");
   button.textContent = playing ? "Ⅱ Pause moment" : "▶ Play moment";
   button.setAttribute("aria-pressed", String(playing));
   button.setAttribute("aria-label", `${playing ? "Pause" : "Play"} the waterfall moment`);
 }
 ["pause", "ended"].forEach(type => document.addEventListener(type, event => {
-  if (event.target instanceof HTMLVideoElement) syncHeroControl(event.target);
+  const player = event.target;
+  if (!(player instanceof HTMLVideoElement)) return;
+  const state = videoStates.get(player);
+  if (!state) return;
+  if (type === "ended") state.completed = true;
+  else if (state.controllerPause) state.controllerPause = false;
+  else if (!player.ended) {
+    state.userPaused = true;
+    state.automatic = false;
+  }
+  if (activeVideo === player) activeVideo = null;
+  syncHeroControl(player);
 }, true));
 document.addEventListener("visibilitychange", () => {
-  if (document.hidden) pauseVideos();
+  updateVideoPlayback();
 });
+reducedMotion.addEventListener("change", updateVideoPlayback);
 const visibilityObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    if (!entry.isIntersecting && !dialog.open) entry.target.pause();
+    const state = videoStates.get(entry.target);
+    if (!state) return;
+    state.ratio = entry.intersectionRatio;
+    if (!entry.isIntersecting) {
+      state.hovered = false;
+      state.userPaused = false;
+      state.completed = false;
+      state.blocked = false;
+    }
   });
-});
+  updateVideoPlayback();
+}, { threshold: [0, .25, .55, .75, 1] });
 
 dialog.addEventListener("click", event => {
   if (event.target !== dialog) return;
@@ -511,15 +613,26 @@ dialog.addEventListener("click", event => {
 });
 dialog.addEventListener("close", () => {
   pauseVideos();
+  dialog.querySelectorAll("video").forEach(player => {
+    visibilityObserver.unobserve(player);
+    videoStates.delete(player);
+    if (activeVideo === player) activeVideo = null;
+  });
   document.body.style.overflow = "";
   if (dialogTrigger?.isConnected) dialogTrigger.focus({ preventScroll: true });
   document.querySelector("#dialog-content").replaceChildren();
+  updateVideoPlayback();
 });
 document.addEventListener("error", event => {
   const target = event.target;
   const player = target instanceof HTMLSourceElement ? target.closest("video") : target;
   if (!(player instanceof HTMLImageElement || player instanceof HTMLVideoElement) || !player.isConnected) return;
   const isVideo = player instanceof HTMLVideoElement;
+  if (isVideo) {
+    visibilityObserver.unobserve(player);
+    videoStates.delete(player);
+    if (activeVideo === player) activeVideo = null;
+  }
   const notice = document.createElement("span");
   notice.className = "photo-error";
   notice.setAttribute("role", "alert");
@@ -536,10 +649,9 @@ if (canonicalUrl.searchParams.has("theme")) {
   history.replaceState(null, "", canonicalUrl);
 }
 renderPortfolio();
-document.querySelectorAll("main video").forEach(player => visibilityObserver.observe(player));
+observeVideos(document.querySelector("main"));
 const journey = document.querySelector(".life-chapters");
 const wanderer = document.querySelector(".wandering-me");
-const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 let scenePaused = false;
 function syncSceneMotion() {
   const paused = scenePaused || reducedMotion.matches;
