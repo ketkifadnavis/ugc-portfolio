@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7efdf">
+    <meta name="description" content="A curious life, still unfolding. Meet Ketki: software developer by profession, explorer at heart. A personal story told through childhood memories, travel, food, lifestyle films and photography.">
+    <title>Ketki — Same curiosity. Bigger world.</title>
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@500;600&family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="photo-data.js" defer></script>
+    <script src="life-data.js" defer></script>
+    <script src="city-data.js" defer></script>
+    <script src="video-data.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#portfolio">Skip to portfolio</a>
+    <main id="portfolio" tabindex="-1"></main>
+    <footer class="portfolio-footer">
+      <a href="#portfolio">Ketki<span aria-hidden="true"> ✳</span></a>
+      <span>Stories from near & far. Made with a curious heart.</span>
+      <a href="#selected-work">Back to the stories ↑</a>
+    </footer>
+    <dialog id="detail-dialog" aria-labelledby="dialog-title">
+      <button class="dialog-close" aria-label="Close dialog" data-action="close-dialog">×</button>
+      <div id="dialog-content"></div>
+    </dialog>
+  </body>
+</html>
