@@ -56,3 +56,6 @@ The atlas self-hosts Leaflet 1.9.4 (BSD-2-Clause) and Leaflet.markercluster 1.5.
 (MIT); their licences are retained in `assets/vendor/`. Map tiles are served by
 OpenStreetMap with visible attribution to its contributors. Browser caching is
 preserved; tiles must not be bulk-downloaded or prefetched for offline use.
+
+Instagram and LinkedIn logo shapes come from Simple Icons 11.15.0 (CC0).
+The logo-only contact links retain accessible profile names.
