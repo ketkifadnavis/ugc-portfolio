@@ -343,7 +343,7 @@ function sideQuestsSection() {
 }
 
 function contactLinks() {
-  return `<div class="contact-links" aria-label="Contact Ketki"><a href="mailto:ketkifadnavis05@gmail.com"><span class="eyebrow">DROP ME A NOTE</span><span>ketkifadnavis05@gmail.com ${arrow}</span></a><a href="https://www.linkedin.com/in/ketki-fadnavis-b8aa60166" target="_blank" rel="noopener noreferrer"><span class="eyebrow">THE DEVELOPER SIDE OF ME</span><span>Find me on LinkedIn ${arrow}</span><span class="contact-new-tab">opens in a new tab</span></a></div>`;
+  return `<div class="contact-links" aria-label="Contact Ketki"><a href="mailto:ketkifadnavis05@gmail.com"><span class="eyebrow">DROP ME A NOTE</span><span>ketkifadnavis05@gmail.com ${arrow}</span></a><a href="https://www.instagram.com/ketki_fadnavis/" target="_blank" rel="noopener noreferrer"><span class="eyebrow">THE EVERYDAY ADVENTURES</span><span>@ketki_fadnavis on Instagram ${arrow}</span><span class="contact-new-tab">opens in a new tab</span></a><a href="https://www.linkedin.com/in/ketki-fadnavis-b8aa60166" target="_blank" rel="noopener noreferrer"><span class="eyebrow">THE DEVELOPER SIDE OF ME</span><span>Find me on LinkedIn ${arrow}</span><span class="contact-new-tab">opens in a new tab</span></a></div>`;
 }
 
 function filteredStories() {
@@ -620,7 +620,7 @@ document.addEventListener("click", event => {
   } else if (button.dataset.action === "close-dialog") {
     dialog.close();
   } else if (button.dataset.action === "collab") {
-    showDialog(`<div class="dialog-copy"><div class="eyebrow">FOR PLACES, PLATES & EVERYDAY WONDERS</div><h2 id="dialog-title">Let's tell a good story.</h2><p>Thoughtful travel, food and lifestyle content with a real sense of being there.</p><div class="dialog-facts"><div><strong>In motion</strong><span>Short-form UGC<br>Travel & experience films<br>Food-led storytelling</span></div><div><strong>In the frame</strong><span>Photography<br>Places & stays<br>Everyday lifestyle</span></div></div>${contactLinks()}<p class="contact-note">A place, a plate, a little idea? Send it my way. The email link opens your mail app; LinkedIn opens my profile.</p></div>`, button);
+    showDialog(`<div class="dialog-copy"><div class="eyebrow">FOR PLACES, PLATES & EVERYDAY WONDERS</div><h2 id="dialog-title">Let's tell a good story.</h2><p>Thoughtful travel, food and lifestyle content with a real sense of being there.</p><div class="dialog-facts"><div><strong>In motion</strong><span>Short-form UGC<br>Travel & experience films<br>Food-led storytelling</span></div><div><strong>In the frame</strong><span>Photography<br>Places & stays<br>Everyday lifestyle</span></div></div>${contactLinks()}<p class="contact-note">A place, a plate, a little idea? Send it my way. The email link opens your mail app; Instagram and LinkedIn open my profiles in a new tab.</p></div>`, button);
   }
 });
 
