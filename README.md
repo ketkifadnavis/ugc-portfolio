@@ -7,7 +7,12 @@ Scene motion can be paused and respects the system's reduced-motion preference.
 Silent films play muted when prominently in view or hovered, with only one playing
 at a time. They pause offscreen or in a hidden tab; manual pauses are respected
 until the film leaves view. Reduced motion keeps playback manual. Popup journals
-preserve photo proportions in a masonry gallery, with a single column on phones.
+use packed, proportion-aware collages: portrait leads have companion photos, and
+two- or three-photo groups share aligned edges without empty image panels.
+Journal films retain their native proportions; vertical clips share a row with
+a companion photo rather than leaving blank side panels.
+The selected photography includes Srinagar lake rides and Kashmir snow days,
+alongside city corners, food, gardens and quiet stays within the same life story.
 
 **Website:** https://ketkifadnavis.github.io/ugc-portfolio/
 

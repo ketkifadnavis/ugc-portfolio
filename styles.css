@@ -300,7 +300,6 @@ main:focus { outline: none; }
 dialog { width: min(780px, calc(100vw - 32px)); max-height: calc(100dvh - 40px); border: 0; border-radius: 10px; padding: 0; color: #2d3028; background: #fffaf0; box-shadow: 0 20px 90px #0003; }
 dialog::backdrop { background: #18211c9c; backdrop-filter: blur(6px); }
 .dialog-close { position: sticky; top: 13px; float: right; margin: 13px 13px -51px 0; z-index: 2; background: #fffcf0; border: 1px solid #ddd7c5; border-radius: 50%; width: 36px; height: 36px; font-size: 25px; line-height: 1; }
-.dialog-photo { height: 300px; }
 .dialog-copy { padding: 32px 38px 38px; }
 .dialog-copy h2 { font: 500 40px/1 var(--display); letter-spacing: -1.7px; margin: 12px 0 20px; padding-right: 15px; }
 .dialog-copy p { font-size: 13px; line-height: 1.9; }
@@ -312,13 +311,18 @@ dialog::backdrop { background: #18211c9c; backdrop-filter: blur(6px); }
 .about-palettes { display: flex; gap: 8px; margin: 25px 0; }
 .about-palettes span { width: 30px; height: 30px; border-radius: 50%; }
 .dialog-link { text-decoration: underline; text-underline-offset: 3px; }
-.dialog-photo { height: auto; max-height: none; background: transparent; }
-.dialog-photo img { width: auto; max-width: 100%; height: auto; max-height: min(70svh, 640px); margin: 0 auto; object-fit: contain; }
+.dialog-photo { width: 100%; }
 .dialog-copy .journal-personal-note { font: 28px/1.2 var(--hand); color: #9c5e35; margin-bottom: 20px; }
-.journal-gallery { column-count: 2; column-gap: 15px; margin-top: 32px; }
-.journal-gallery figure { break-inside: avoid; margin: 0 0 24px; min-width: 0; }
-.journal-gallery img { width: 100%; height: auto; object-fit: contain; }
-.journal-gallery figcaption { font: 19px/1.2 var(--hand); color: #7d705f; padding: 9px 3px 0; }
+.journal-gallery { display: grid; gap: 8px; margin-top: 32px; }
+.collage-row { --photo-gap: 8px; display: flex; align-items: start; gap: var(--photo-gap); width: 100%; }
+.collage-frame, .journal-video-frame { flex: var(--photo-ratio) 1 0; min-width: 0; aspect-ratio: var(--photo-ratio); }
+.collage-frame { position: relative; margin: 0; overflow: hidden; }
+.collage-frame img { width: 100%; height: 100%; object-fit: cover; }
+.collage-frame figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 25px 10px 9px; color: #fffaf0; background: linear-gradient(transparent, #25251dbf); font: 19px/1.1 var(--hand); text-shadow: 0 1px 3px #0008; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+/* Offset the stacked column's extra gutter so both columns keep their natural image heights. */
+.collage-trio > .collage-frame { flex: var(--primary-weight) 1 calc(var(--primary-ratio) * var(--photo-gap)); }
+.collage-stack { display: flex; flex-direction: column; flex: 1 1 0; min-width: 0; gap: var(--photo-gap); }
+.collage-stack > .collage-frame { flex: none; width: 100%; }
 .story-section { --doodle-color: #efc56c; --doodle-paper: #fffaf0; position: relative; }
 .story-section .section-heading { align-items: center; gap: 55px; margin-bottom: 55px; }
 .story-introduction { max-width: 750px; }
@@ -557,8 +561,10 @@ dialog::backdrop { background: #18211c9c; backdrop-filter: blur(6px); }
   .dialog-copy h2 { font-size: 34px; }
   .dialog-copy p { font-size: 12px; }
   .dialog-facts { gap: 18px; }
-  .journal-gallery { column-gap: 10px; }
-  .journal-gallery figcaption { font-size: 17px; }
+  .journal-gallery { gap: 6px; }
+  .collage-row { --photo-gap: 6px; }
+  .collage-frame figcaption { font-size: 15px; padding: 20px 8px 7px; }
+  .collage-stack figcaption { font-size: 13px; }
   .story-section .section-heading { gap: 24px; margin-bottom: 20px; flex-direction: row; align-items: start; flex-wrap: wrap; }
   .story-introduction { flex: 1 1 240px; }
   .story-introduction > .eyebrow { font-size: 7px; margin-bottom: 13px; }
@@ -716,8 +722,8 @@ video { display: block; max-width: 100%; background: #e6dfcf; }
 .collection-title { font: 500 22px/1.2 var(--display); display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-top: 6px; letter-spacing: -.5px; }
 .more-stories { text-align: center; margin-top: 35px; }
 .journal-film { margin: 30px 0; }
-.journal-film video { width: 100%; max-height: 450px; object-fit: contain; }
-.journal-film figcaption { margin-top: 12px; font: 11px/1.7 var(--sans); color: #8b785b; }
+.journal-film video { width: 100%; height: auto; object-fit: contain; }
+.journal-film > figcaption { margin-top: 12px; font: 11px/1.7 var(--sans); color: #8b785b; }
 .dialog-copy .contact-preview { margin-top: 28px; padding: 15px; font-size: 11px; border: 1px dashed #bbad93; }
 .photo-error { min-height: 180px; }
 .portfolio-footer { display: flex; justify-content: space-between; align-items: center; gap: 25px; background: #ede3cf; border-top: 1px solid #a794714d; padding: 30px max(24px, calc((100vw - 1192px) / 2)); }
@@ -1098,7 +1104,4 @@ video { display: block; max-width: 100%; background: #e6dfcf; }
 @media (prefers-reduced-motion: reduce) {
   .world-cloud, .world-balloon { animation: none; }
   .world-stop, .chapter-map a { transition: none; }
-}
-@media (max-width: 520px) {
-  .journal-gallery { column-count: 1; }
 }

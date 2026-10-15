@@ -2,18 +2,18 @@
 
 const projects = {
   ocean: { title: "Salt in the air", label: "Travel / A slower kind of escape", photo: "1002", photos: ["1182", "0969", "0983", "1297", "1295", "0412"], video: "soft-surf", type: "travel", category: "TRAVEL", idea: "Bare feet, soft surf, and the sort of blue you wish you could bottle. I came for the coastline and stayed for the feeling of having nowhere else to be." },
-  cafes: { title: "One more coffee?", label: "Food & lifestyle / Little rituals", photo: "1328", photos: ["1085", "0771", "2277", "0595", "1468"], type: "food", category: "FOOD & LIFESTYLE", idea: "A seat by the window. Something warm in a good cup. The places where a quick stop turns into the best part of the afternoon." },
+  cafes: { title: "One more coffee?", label: "Food & lifestyle / Little rituals", photo: "1328", photos: ["b2182", "1085", "0771", "2277", "0595", "1468"], type: "food", category: "FOOD & LIFESTYLE", idea: "A seat by the window. Something warm in a good cup. The places where a quick stop turns into the best part of the afternoon." },
   city: { title: "Take the long way", label: "Travel / City-side discoveries", photo: "1778", photos: ["1735", "1671", "1685", "1114", "2384", "1392"], video: "city-after-dark", type: "travel", category: "TRAVEL", idea: "Big city views, tiny discoveries, and all the reasons I never quite stick to the itinerary. I like to see a place in daylight, then meet it all over again after dark." },
-  colour: { title: "A city, a little differently", label: "Travel / Murals & little details", photo: "2241", photos: ["1598", "1753", "2002", "2027", "1443", "0545", "2004"], type: "travel", category: "CITY LIFE & COLOUR", idea: "A playful painted window. Streets stretching between the buildings. A ceiling that makes me stop and look up. Different places, the same little habit: noticing the character in the corners, not only the landmarks." },
-  mountain: { title: "A change of altitude", label: "Travel / Into the green", photo: "1461", photos: ["2548", "0902", "0896", "1834", "0642", "2523"], type: "travel", category: "TRAVEL", idea: "Tea-green hills, mountain air, and the joy of putting the phone away—after one more photograph. These are the places where I remember to take my time." },
-  table: { title: "Worth a second bite", label: "Food / Color on the table", photo: "1447", photos: ["1252", "0638", "1707", "2010", "1952"], video: "something-sweet", type: "food", category: "FOOD", idea: "I follow my appetite as often as the map. A beautifully plated meal, a street-side sweet, a familiar comfort: the food is part of how I get to know a place." },
-  noodles: { title: "Follow your appetite", label: "Food / A very good detour", photo: "2324", photos: ["2010", "1252", "1447"], type: "food", category: "FOOD", idea: "Some travel memories come in a bowl. A small collection of comforting plates, warm tables, and very good reasons to take a food detour." },
-  boat: { title: "The scenic route, always", label: "Travel / Postcards from the detour", photo: "0548", photos: ["0585", "0563", "2232", "0485", "0834", "0778"], video: "river-bends", type: "travel", category: "TRAVEL", idea: "Boat days, winding rivers, sculptural landmarks, and views that make the climb worth it. Sometimes the best part of the journey is simply watching it unfold." },
-  lifestyle: { title: "The life in between", label: "Lifestyle / Everyday good things", photo: "1234", photos: ["1362", "2453", "2358", "1480", "0987", "2397", "0798", "1961"], type: "lifestyle", category: "LIFESTYLE", idea: "The laughing-at-the-table moments, the unexpected good light, the little rituals. There doesn't have to be a landmark for a day to have a story." },
+  colour: { title: "A city, a little differently", label: "Travel / Murals & little details", photo: "2241", photos: ["b3019", "1598", "1753", "2027", "1443", "0545", "2004"], type: "travel", category: "CITY LIFE & COLOUR", idea: "A playful painted window. A bookshop I could happily disappear into. A ceiling that makes me stop and look up. Different places, the same little habit: noticing the character in the corners, not only the landmarks." },
+  mountain: { title: "A change of altitude", label: "Travel / Into the mountain air", photo: "b2793", photos: ["b2889", "b2881", "b0879", "1461", "2548", "1834"], type: "travel", category: "TRAVEL", idea: "From tea-green hills to snow-bright valleys, mountain air always changes my pace. Sometimes I take in the view. Sometimes I make a new friend out of snow. Little me would understand both." },
+  table: { title: "Worth a second bite", label: "Food / Color on the table", photo: "1447", photos: ["b0809", "b0821", "b2652", "1252", "0638", "1707"], video: "something-sweet", type: "food", category: "FOOD", idea: "I follow my appetite as often as the map. A beautifully plated meal, a street-side sweet, a familiar comfort: the food is part of how I get to know a place." },
+  noodles: { title: "Follow your appetite", label: "Food / A very good detour", photo: "b2652", photos: ["2324", "2010", "1252", "b0809"], type: "food", category: "FOOD", idea: "Some travel memories come in a bowl. A small collection of comforting plates, warm tables, and very good reasons to take a food detour." },
+  boat: { title: "The scenic route, always", label: "Travel / Postcards from the detour", photo: "b0750", photos: ["b2606", "0548", "0585", "0563", "2232", "0834", "0778"], video: "river-bends", type: "travel", category: "TRAVEL", idea: "A sunset shikara ride. Winding rivers. A garden path I take a little slower. Sometimes the best part of the journey is simply watching it unfold." },
+  lifestyle: { title: "The life in between", label: "Lifestyle / Everyday good things", photo: "b2380", photos: ["1234", "b0638", "b1949", "2358", "1480", "2397", "0798", "1961"], type: "lifestyle", category: "LIFESTYLE", idea: "The laughing-at-the-table moments, the unexpected good light, the little rituals. There doesn't have to be a landmark for a day to have a story." },
   afterdark: { title: "Out past the golden hour", label: "Lifestyle / After dark", photo: "0959", photos: ["0506", "1952", "0595"], type: "lifestyle", category: "TRAVEL & LIFESTYLE", idea: "Lanterns, a glowing canal, and one more stop before calling it a night. I'm usually the one saying, 'Let's walk just a little further.'" },
-  quiet: { title: "Do not disturb this moment", label: "Lifestyle / The slower side", photo: "2039", photos: ["2525", "0590", "2191", "1297", "0642", "1461"], video: "waterfall-pause", type: "lifestyle", category: "TRAVEL & LIFESTYLE", idea: "Light through the trees. A waterfall worth lingering at. The quieter places don't need much from me, just a little attention." },
+  quiet: { title: "Do not disturb this moment", label: "Lifestyle / The slower side", photo: "0590", photos: ["b0638", "2039", "2525", "2191", "1297", "0642", "1461"], video: "waterfall-pause", type: "lifestyle", category: "TRAVEL & LIFESTYLE", idea: "Light through the trees. A waterfall worth lingering at. The quieter places don't need much from me, just a little attention." },
   details: { title: "Look a little closer", label: "Travel / Colors & corners", photo: "0542", photos: ["1429", "2002", "1468", "1952"], type: "travel", category: "PLACES & DETAILS", idea: "A turquoise hall, a carved ceiling, a painted doorway. Sometimes the smallest part of a place is the part I remember most." },
-  stays: { title: "Checked in, switched off", label: "Lifestyle / A stay with a view", photo: "0902", photos: ["0932", "0896", "1309"], type: "lifestyle", category: "TRAVEL & LIFESTYLE", idea: "The mountain backdrop, the poolside pause, the balcony I don't want to leave. I remember a stay by how it lets me settle into a place." },
+  stays: { title: "Checked in, switched off", label: "Lifestyle / A stay with a view", photo: "b2182", photos: ["b1583", "b2606", "0902", "0932"], type: "lifestyle", category: "TRAVEL & LIFESTYLE", idea: "A warm cup by the window. Cottages under the palms. The garden I wander through before breakfast. I remember a stay by how it lets me settle into a place." },
 };
 
 const personalNotes = {
@@ -21,7 +21,7 @@ const personalNotes = {
   cafes: "I remember a café by how it makes me linger, not just what's in the cup.",
   city: "I like a city best when I leave a little room to be surprised.",
   colour: "Sometimes a city says hello in colour. Sometimes I say hello back.",
-  mountain: "Greener places always give me a little of myself back.",
+  mountain: "Different weather. Still the same little explorer.",
   table: "A new place makes a lot more sense to me after a really good meal.",
   noodles: "Something warm, something new, and one more bite.",
   boat: "Big views get my attention. The journey makes the memory.",
@@ -62,7 +62,7 @@ let storyFilter = "all";
 let storiesExpanded = false;
 let dialogTrigger = null;
 const dialog = document.querySelector("#detail-dialog");
-const photoLibrary = { ...portfolioPhotos, ...lifePhotos, ...cityPhotos };
+const photoLibrary = { ...portfolioPhotos, ...lifePhotos, ...cityPhotos, ...backupPhotos };
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const videoStates = new Map();
 let activeVideo = null;
@@ -70,16 +70,16 @@ let activeVideo = null;
 const memories = [
   { photo: "1598", project: "colour", type: "city", title: "Between the buildings", detail: "Taking the long way home" },
   { photo: "1447", project: "table", type: "food", title: "A very good reason to stop", detail: "A table full of colour" },
-  { photo: "2039", project: "quiet", type: "lifestyle", title: "A little good light", detail: "No big plans required" },
+  { photo: "b0879", project: "mountain", type: "lifestyle", title: "Very serious snowperson research", detail: "Little me is absolutely still here" },
   { photo: "2241", project: "colour", type: "city", title: "A little street-side mischief", detail: "A painted window. A real memory." },
   { photo: "1328", project: "cafes", type: "food", title: "But first, this", detail: "The smallest daily adventure" },
   { photo: "0545", project: "colour", type: "city", title: "Remember to look up", detail: "Art isn't always in a gallery" },
   { photo: "1234", project: "lifestyle", type: "lifestyle", title: "The happy in-between", detail: "Little life, fully appreciated" },
   { photo: "2004", project: "colour", type: "food", title: "A cup, a corner, a little art", detail: "Coffee with a side of linework" },
   { photo: "2027", project: "colour", type: "city", title: "Stay until the lights come on", detail: "One more walk before heading back" },
-  { photo: "2453", project: "lifestyle", type: "lifestyle", title: "Taking the afternoon off", detail: "A slower kind of good day" },
+  { photo: "b2380", project: "lifestyle", type: "lifestyle", title: "A sunflower kind of day", detail: "A slower kind of good day" },
   { photo: "1707", project: "table", type: "food", title: "Always room for this", detail: "Something sweet along the way" },
-  { photo: "1362", project: "lifestyle", type: "lifestyle", title: "A small patch of sunshine", detail: "The things I want to remember" },
+  { photo: "b1949", project: "lifestyle", type: "lifestyle", title: "A small patch of sunshine", detail: "The things I want to remember" },
 ];
 let memoryFilter = "all";
 let memoryOrder = [...memories];
@@ -237,7 +237,7 @@ function cityPages() {
   return `<aside class="city-pages" id="city-colours" aria-labelledby="city-title">
     <div class="city-intro"><span class="eyebrow">ANOTHER PAGE FROM THE SAME CURIOUS LIFE</span><h3 id="city-title">Not just the view.<br><em>The character.</em></h3><p>I love the big landscapes. But give me a city with a little personality, and I'll happily take the long way home.</p><p>Painted walls. A skyline between the clouds. A tiny detail I nearly missed. There's a different kind of adventure here, too.</p><button class="story-text-link" data-project="colour">Follow the colours ${arrow}</button><span class="chapter-scribble">sometimes the wall has a story, too.</span></div>
     <button class="city-postcard" data-project="colour" data-photo="2241" aria-label="Open my street-art story">${image("2241", { sizes: "(max-width: 760px) calc(100vw - 64px), 540px" })}<span class="city-postcard-caption"><span class="eyebrow">A HAPPY LITTLE DETOUR</span><span>me, making friends with the scenery.</span>${arrow}</span><span class="pencil-tape" aria-hidden="true"></span></button>
-    <div class="city-contact-sheet"><button data-project="colour" data-photo="1753" aria-label="Explore my Singapore skyline photograph">${image("1753")}<span>the city takes a breath.</span></button><button data-project="colour" data-photo="0545" aria-label="Explore the painted ceiling photograph">${image("0545")}<span>and then I remember to look up.</span></button></div>
+    <div class="city-contact-sheet"><button data-project="colour" data-photo="b3019" aria-label="Explore my bookshop photograph">${image("b3019")}<span>a city, a page at a time.</span></button><button data-project="colour" data-photo="0545" aria-label="Explore the painted ceiling photograph">${image("0545")}<span>and then I remember to look up.</span></button></div>
   </aside>`;
 }
 
@@ -261,8 +261,8 @@ function lifeStory() {
       </article>
       <div class="chapter-bridge"><span>close a tab.<br>open a little world.</span>${scribble}</div>
       <article class="life-chapter travel-chapter" id="the-detours">
-        <div class="chapter-visual"><figure class="chapter-film landscape-film">${video("river-bends")}<figcaption>FILM ${durationLabel("river-bends")} / the scenic route, in motion.</figcaption></figure><figure class="photo-print travel-inset">${image("2232", { sizes: "240px" })}<figcaption>no rush to be anywhere else.</figcaption></figure></div>
-        <div class="chapter-copy"><span class="eyebrow">03 / BEYOND THE SCREEN</span><h3>The world<br><em>keeps calling.</em></h3><p>And I keep finding reasons to go. A winding river. An unfamiliar street. A view that makes the early start feel worth it.</p><p>Near or far, I want to know what a place feels like—not just what it looks like on a map.</p><button class="story-text-link" data-project="boat">Come a little further ${arrow}</button><span class="chapter-scribble">little me would approve of this detour.</span></div>
+        <div class="chapter-visual"><figure class="chapter-film landscape-film">${video("river-bends")}<figcaption>FILM ${durationLabel("river-bends")} / the scenic route, in motion.</figcaption></figure><figure class="photo-print travel-inset">${image("b0750", { sizes: "240px" })}<figcaption>no rush to be anywhere else.</figcaption></figure></div>
+        <div class="chapter-copy"><span class="eyebrow">03 / BEYOND THE SCREEN</span><h3>The world<br><em>keeps calling.</em></h3><p>And I keep finding reasons to go. A winding river. A snow-bright valley. A view that makes the early start feel worth it.</p><p>Near or far, I want to know what a place feels like—not just what it looks like on a map.</p><button class="story-text-link" data-project="boat" data-photo="b0750">Come a little further ${arrow}</button><span class="chapter-scribble">little me would approve of this detour.</span></div>
       </article>
       ${cityPages()}
       <aside class="evening-interlude">
@@ -270,12 +270,12 @@ function lifeStory() {
         <div><span class="eyebrow">AND SOMETIMES...</span><p>“Just one more stop”<br>becomes the best<br><em>part of the day.</em></p><span class="handwritten">I blame the lights.</span>${star()}</div>
       </aside>
       <article class="life-chapter food-chapter" id="at-the-table">
-        <div class="chapter-visual food-visual"><figure class="chapter-film food-film">${video("something-sweet")}<figcaption>FILM ${durationLabel("something-sweet")} / a sweet little detour.</figcaption></figure><figure class="photo-print food-inset">${image("1447", { sizes: "240px" })}<figcaption>room for one more?</figcaption></figure></div>
+        <div class="chapter-visual food-visual"><figure class="chapter-film food-film">${video("something-sweet")}<figcaption>FILM ${durationLabel("something-sweet")} / a sweet little detour.</figcaption></figure><figure class="photo-print food-inset">${image("b0809", { sizes: "240px" })}<figcaption>room for one more?</figcaption></figure></div>
         <div class="chapter-copy"><span class="eyebrow">04 / FOLLOW THE APPETITE</span><h3>A place makes<br><em>more sense over food.</em></h3><p>The street-side stops. The first bite of something new. The café where a quick coffee turns into a whole afternoon.</p><p>Food is never a separate part of the journey for me. It's how I settle into it.</p><button class="story-text-link" data-project="table">Pull up a chair ${arrow}</button><span class="chapter-scribble">a very important part of my research.</span></div>
       </article>
       <div class="chapter-bridge"><span>but life isn't<br>only the big trips...</span>${scribble}</div>
       <article class="life-chapter everyday-chapter" id="little-things">
-        <div class="chapter-visual"><figure class="chapter-film landscape-film">${video("soft-surf")}<figcaption>FILM ${durationLabel("soft-surf")} / nowhere else I need to be.</figcaption></figure><div class="everyday-details"><figure class="photo-print">${image("1328", { sizes: "180px" })}<figcaption>a little ritual.</figcaption></figure><figure class="photo-print">${image("2039", { sizes: "180px" })}<figcaption>a little good light.</figcaption></figure></div></div>
+        <div class="chapter-visual"><figure class="chapter-film landscape-film">${video("soft-surf")}<figcaption>FILM ${durationLabel("soft-surf")} / nowhere else I need to be.</figcaption></figure><div class="everyday-details"><figure class="photo-print">${image("1328", { sizes: "180px" })}<figcaption>a little ritual.</figcaption></figure><figure class="photo-print">${image("b0638", { sizes: "180px" })}<figcaption>a little colour.</figcaption></figure></div></div>
         <div class="chapter-copy"><span class="eyebrow">05 / THE LIFE IN BETWEEN</span><h3>Not every story<br><em>needs a suitcase.</em></h3><p>A good cup. Light through the trees. A moment with no particular plan. I want to notice those things, too.</p><p>That's the thread through all of this: less about collecting places, more about paying attention.</p><button class="story-text-link" data-project="quiet">Stay for the little things ${arrow}</button><span class="chapter-scribble">still curious. still looking around.</span></div>
       </article>
     </div>
@@ -375,7 +375,7 @@ function renderPortfolio() {
     ${worldOpening()}
     ${lifeStory()}${memoriesSection()}${sideQuestsSection()}${collectionsSection()}
     <section class="end-note wrap" id="about-creator">
-      <div class="creator-portrait">${image("0987", { sizes: "(max-width: 760px) 160px, 240px" })}</div>
+      <div class="creator-portrait">${image("b2881", { sizes: "(max-width: 760px) 160px, 240px" })}</div>
       <div class="creator-story"><div class="eyebrow">THIS IS WHERE THE CHAPTERS MEET</div><h2>Different chapters. Still me.</h2><p>Software developer. Travel, food & lifestyle storyteller. Curious, always.</p>
         <p class="creator-bio">The little explorer, the person behind the laptop, the one stopping for a view or another bite: it's all the same story. I bring that curiosity to the films, photographs and experiences I share—and to the stories I create with others.</p>
         <button class="pill" data-action="collab">Let's create something that feels real ${arrow}</button>
@@ -407,17 +407,66 @@ function showDialog(content, trigger) {
   observeVideos(dialog);
 }
 
+function collageFrame(id, eager) {
+  const photo = photoLibrary[id];
+  return `<figure class="collage-frame" data-collage-photo="${id}" style="--photo-ratio:${photo.width / photo.height}">${image(id, { eager, sizes: "(max-width: 760px) 65vw, 520px" })}<figcaption>${photo.title}</figcaption></figure>`;
+}
+
+function collageRow(ids, eager = false) {
+  if (ids.length !== 3) return `<div class="collage-row">${ids.map(id => collageFrame(id, eager)).join("")}</div>`;
+  const [primary, ...stack] = ids;
+  const ratio = photoLibrary[primary].width / photoLibrary[primary].height;
+  const weight = ratio * stack.reduce((sum, id) => sum + photoLibrary[id].height / photoLibrary[id].width, 0);
+  return `<div class="collage-row collage-trio" style="--primary-ratio:${ratio};--primary-weight:${weight}">${collageFrame(primary, eager)}<div class="collage-stack">${stack.map(id => collageFrame(id, eager)).join("")}</div></div>`;
+}
+
+function journalCollage(photos) {
+  const rows = [];
+  for (let start = 0; start < photos.length;) {
+    const remaining = photos.length - start;
+    const count = remaining === 4 ? 2 : Math.min(3, remaining);
+    const row = photos.slice(start, start + count);
+    if (count === 3) {
+      const portrait = row.findIndex(id => photoLibrary[id].height > photoLibrary[id].width);
+      if (portrait > 0) row.unshift(...row.splice(portrait, 1));
+    }
+    rows.push(collageRow(row));
+    start += count;
+  }
+  return rows.join("");
+}
+
+function journalFilm(id, companion) {
+  const clip = video(id);
+  const asset = portfolioVideos[id];
+  const media = companion
+    ? `<div class="collage-row"><div class="journal-video-frame" style="--photo-ratio:${asset.width / asset.height}">${clip}</div>${collageFrame(companion, false)}</div>`
+    : clip;
+  return `<figure class="journal-film">${media}<figcaption>${asset.description}. A silent moment from the journey.</figcaption></figure>`;
+}
+
 function showProject(id, trigger) {
   const project = projects[id];
   if (!project) throw new Error(`Unknown portfolio story: ${id}`);
   const lead = trigger.dataset.photo || project.photo;
   const photos = [...new Set([project.photo, ...project.photos])];
   if (!photos.includes(lead)) throw new Error(`Photo ${lead} does not belong to story ${id}`);
-  showDialog(`<div class="dialog-photo">${image(lead, { eager: true, sizes: "(max-width: 760px) calc(100vw - 32px), 780px" })}</div><div class="dialog-copy">
+  const opening = [lead];
+  if (photoLibrary[lead].height > photoLibrary[lead].width) {
+    const companions = photos.filter(photo => photo !== lead).sort((a, b) =>
+      Number(photoLibrary[b].width >= photoLibrary[b].height) - Number(photoLibrary[a].width >= photoLibrary[a].height));
+    opening.push(...companions.slice(0, photos.length >= 5 ? 2 : 1));
+  }
+  const remaining = photos.filter(photo => !opening.includes(photo));
+  const film = project.video && portfolioVideos[project.video];
+  const filmCompanion = film && film.height > film.width
+    ? remaining.find(photo => photoLibrary[photo].width >= photoLibrary[photo].height) || remaining[0]
+    : null;
+  showDialog(`<div class="dialog-photo">${collageRow(opening, true)}</div><div class="dialog-copy">
     <div class="eyebrow">${project.category} / NEAR & FAR</div><h2 id="dialog-title">${project.title}</h2>
     <p class="journal-personal-note">${personalNotes[id]}</p><p>${project.idea}</p>
-    ${project.video ? `<figure class="journal-film">${video(project.video)}<figcaption>${portfolioVideos[project.video].description}. A silent moment from the journey.</figcaption></figure>` : ""}
-    <div class="journal-gallery">${photos.filter(photo => photo !== lead).map(photo => `<figure>${image(photo, { sizes: "(max-width: 520px) calc(100vw - 80px), (max-width: 760px) calc((100vw - 90px) / 2), 344px" })}<figcaption>${photoLibrary[photo].title}</figcaption></figure>`).join("")}</div>
+    ${project.video ? journalFilm(project.video, filmCompanion) : ""}
+    <div class="journal-gallery">${journalCollage(remaining.filter(photo => photo !== filmCompanion))}</div>
     <p class="photo-credit" style="margin-top:24px">Original photography and footage from my travels and everyday life.</p>
   </div>`, trigger);
 }
