@@ -62,7 +62,7 @@ let storyFilter = "all";
 let storiesExpanded = false;
 let dialogTrigger = null;
 const dialog = document.querySelector("#detail-dialog");
-const photoLibrary = { ...portfolioPhotos, ...lifePhotos, ...cityPhotos, ...backupPhotos };
+const photoLibrary = { ...portfolioPhotos, ...lifePhotos, ...cityPhotos, ...backupPhotos, ...atlasPhotos };
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const videoStates = new Map();
 let activeVideo = null;
@@ -264,6 +264,7 @@ function lifeStory() {
         <div class="chapter-visual"><figure class="chapter-film landscape-film">${video("river-bends")}<figcaption>FILM ${durationLabel("river-bends")} / the scenic route, in motion.</figcaption></figure><figure class="photo-print travel-inset">${image("b0750", { sizes: "240px" })}<figcaption>no rush to be anywhere else.</figcaption></figure></div>
         <div class="chapter-copy"><span class="eyebrow">03 / BEYOND THE SCREEN</span><h3>The world<br><em>keeps calling.</em></h3><p>And I keep finding reasons to go. A winding river. A snow-bright valley. A view that makes the early start feel worth it.</p><p>Near or far, I want to know what a place feels like—not just what it looks like on a map.</p><button class="story-text-link" data-project="boat" data-photo="b0750">Come a little further ${arrow}</button><span class="chapter-scribble">little me would approve of this detour.</span></div>
       </article>
+      ${travelAtlasSection()}
       ${cityPages()}
       <aside class="evening-interlude">
         <figure class="chapter-film">${video("city-after-dark")}<figcaption>FILM ${durationLabel("city-after-dark")} / a city, after dark.</figcaption></figure>
@@ -370,7 +371,7 @@ function renderPortfolio() {
   document.querySelector("#portfolio").innerHTML = `<article class="theme scrapbook">
     <div class="wrap"><header class="page-nav">
       <a href="#portfolio" class="wordmark" aria-label="Ketki, portfolio home">Ketki<span aria-hidden="true"> ✳</span><small>stories, near & far</small></a>
-      <nav class="nav-links" aria-label="Portfolio navigation"><a href="#selected-work">My story</a><a href="#the-detours">The detours</a><a href="#about-creator">Say hello</a><button class="pill" data-action="collab">Let's create ${arrow}</button></nav>
+      <nav class="nav-links" aria-label="Portfolio navigation"><a href="#selected-work">My story</a><a href="#travel-atlas">Travel map</a><a href="#about-creator">Say hello</a><button class="pill" data-action="collab">Let's create ${arrow}</button></nav>
     </header></div>
     ${worldOpening()}
     ${lifeStory()}${memoriesSection()}${sideQuestsSection()}${collectionsSection()}
@@ -400,12 +401,21 @@ function updateCollections() {
 
 function showDialog(content, trigger) {
   pauseVideos();
+  releaseDialogVideos();
   dialogTrigger = trigger;
   document.querySelector("#dialog-content").innerHTML = content;
   dialog.showModal();
   dialog.scrollTop = 0;
   document.body.style.overflow = "hidden";
   observeVideos(dialog);
+}
+
+function releaseDialogVideos() {
+  dialog.querySelectorAll("video").forEach(player => {
+    visibilityObserver.unobserve(player);
+    videoStates.delete(player);
+    if (activeVideo === player) activeVideo = null;
+  });
 }
 
 function collageFrame(id, eager) {
@@ -449,9 +459,23 @@ function journalFilm(id, companion) {
 function showProject(id, trigger) {
   const project = projects[id];
   if (!project) throw new Error(`Unknown portfolio story: ${id}`);
+  showPhotoJournal(project, personalNotes[id], trigger);
+}
+
+function showPlace(id, trigger) {
+  const place = portfolioPlaces.find(item => item.id === id);
+  if (!place) throw new Error(`Unknown portfolio place: ${id}`);
+  if (!place.photos.length) {
+    showDialog(`<div class="dialog-copy atlas-coming-soon"><span class="eyebrow">${place.country} / A VISITED STOP</span><h2 id="dialog-title">${place.name}</h2>${chapterIcon("mountain")}<p class="journal-personal-note">${place.note}</p><p>${place.story}</p><p class="atlas-coming-soon-label">Photos coming soon.</p></div>`, trigger);
+    return;
+  }
+  showPhotoJournal({ title: place.name, category: place.country.toUpperCase(), photo: place.photos[0], photos: place.photos.slice(1), video: place.video, idea: place.story }, place.note, trigger);
+}
+
+function showPhotoJournal(project, note, trigger) {
   const lead = trigger.dataset.photo || project.photo;
   const photos = [...new Set([project.photo, ...project.photos])];
-  if (!photos.includes(lead)) throw new Error(`Photo ${lead} does not belong to story ${id}`);
+  if (!photos.includes(lead)) throw new Error(`Photo ${lead} does not belong to story ${project.title}`);
   const opening = [lead];
   if (photoLibrary[lead].height > photoLibrary[lead].width) {
     const companions = photos.filter(photo => photo !== lead).sort((a, b) =>
@@ -463,11 +487,12 @@ function showProject(id, trigger) {
   const filmCompanion = film && film.height > film.width
     ? remaining.find(photo => photoLibrary[photo].width >= photoLibrary[photo].height) || remaining[0]
     : null;
+  const gallery = remaining.filter(photo => photo !== filmCompanion);
   showDialog(`<div class="dialog-photo">${collageRow(opening, true)}</div><div class="dialog-copy">
     <div class="eyebrow">${project.category} / NEAR & FAR</div><h2 id="dialog-title">${project.title}</h2>
-    <p class="journal-personal-note">${personalNotes[id]}</p><p>${project.idea}</p>
+    <p class="journal-personal-note">${note}</p><p>${project.idea}</p>
     ${project.video ? journalFilm(project.video, filmCompanion) : ""}
-    <div class="journal-gallery">${journalCollage(remaining.filter(photo => photo !== filmCompanion))}</div>
+    ${gallery.length ? `<div class="journal-gallery">${journalCollage(gallery)}</div>` : ""}
     <p class="photo-credit" style="margin-top:24px">Original photography and footage from my travels and everyday life.</p>
   </div>`, trigger);
 }
@@ -555,6 +580,7 @@ function observeVideos(root) {
 document.addEventListener("click", event => {
   const button = event.target.closest("button");
   if (!button) return;
+  if (button.dataset.placeStory) return showPlace(button.dataset.placeStory, button);
   if (button.dataset.project) return showProject(button.dataset.project, button);
   if (button.dataset.memoryFilter) {
     memoryFilter = button.dataset.memoryFilter;
@@ -662,12 +688,10 @@ dialog.addEventListener("click", event => {
   if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close();
 });
 dialog.addEventListener("close", () => {
+  // A queued close event must not clear a journal that has already reopened.
+  if (dialog.open) return;
   pauseVideos();
-  dialog.querySelectorAll("video").forEach(player => {
-    visibilityObserver.unobserve(player);
-    videoStates.delete(player);
-    if (activeVideo === player) activeVideo = null;
-  });
+  releaseDialogVideos();
   document.body.style.overflow = "";
   if (dialogTrigger?.isConnected) dialogTrigger.focus({ preventScroll: true });
   document.querySelector("#dialog-content").replaceChildren();
@@ -675,6 +699,7 @@ dialog.addEventListener("close", () => {
 });
 document.addEventListener("error", event => {
   const target = event.target;
+  if (target instanceof HTMLImageElement && target.classList.contains("leaflet-tile")) return;
   const player = target instanceof HTMLSourceElement ? target.closest("video") : target;
   if (!(player instanceof HTMLImageElement || player instanceof HTMLVideoElement) || !player.isConnected) return;
   const isVideo = player instanceof HTMLVideoElement;
@@ -699,6 +724,7 @@ if (canonicalUrl.searchParams.has("theme")) {
   history.replaceState(null, "", canonicalUrl);
 }
 renderPortfolio();
+initTravelAtlas();
 observeVideos(document.querySelector("main"));
 const journey = document.querySelector(".life-chapters");
 const wanderer = document.querySelector(".wandering-me");
