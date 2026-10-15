@@ -297,7 +297,30 @@ main:focus { outline: none; }
 .quests .end-note { background: #e8d9e9; }
 
 /* Shared dialog */
-dialog { width: min(780px, calc(100vw - 32px)); max-height: calc(100dvh - 40px); border: 0; border-radius: 10px; padding: 0; color: #2d3028; background: #fffaf0; box-shadow: 0 20px 90px #0003; }
+dialog {
+  position: fixed;
+  inset: 20px 0;
+  margin: auto;
+  width: min(780px, calc(100vw - 32px));
+  height: fit-content;
+  max-height: calc(100vh - 40px);
+  max-height: calc(100dvh - 40px);
+  overflow-x: hidden;
+  overflow-y: scroll;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: #b8ad98 #fffaf0;
+  border: 0;
+  border-radius: 10px;
+  padding: 0;
+  color: #2d3028;
+  background: #fffaf0;
+  box-shadow: 0 20px 90px #0003;
+}
+dialog::-webkit-scrollbar { width: 10px; }
+dialog::-webkit-scrollbar-track { background: #fffaf0; }
+dialog::-webkit-scrollbar-thumb { background: #b8ad98; border: 2px solid #fffaf0; border-radius: 10px; }
 dialog::backdrop { background: #18211c9c; backdrop-filter: blur(6px); }
 .dialog-close { position: sticky; top: 13px; float: right; margin: 13px 13px -51px 0; z-index: 2; background: #fffcf0; border: 1px solid #ddd7c5; border-radius: 50%; width: 36px; height: 36px; font-size: 25px; line-height: 1; }
 .dialog-copy { padding: 32px 38px 38px; }

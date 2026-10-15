@@ -403,6 +403,7 @@ function showDialog(content, trigger) {
   dialogTrigger = trigger;
   document.querySelector("#dialog-content").innerHTML = content;
   dialog.showModal();
+  dialog.scrollTop = 0;
   document.body.style.overflow = "hidden";
   observeVideos(dialog);
 }

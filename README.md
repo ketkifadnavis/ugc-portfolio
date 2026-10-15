@@ -9,6 +9,8 @@ at a time. They pause offscreen or in a hidden tab; manual pauses are respected
 until the film leaves view. Reduced motion keeps playback manual. Popup journals
 use packed, proportion-aware collages: portrait leads have companion photos, and
 two- or three-photo groups share aligned edges without empty image panels.
+Journals have an explicit viewport-bounded scroll area with a visible scrollbar
+and a sticky close button. Each journal reopens at the top.
 Journal films retain their native proportions; vertical clips share a row with
 a companion photo rather than leaving blank side panels.
 The selected photography includes Srinagar lake rides and Kashmir snow days,
